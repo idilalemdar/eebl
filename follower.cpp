@@ -16,21 +16,26 @@ vector<double> tokenize(string original){
 int main(int argc, char *argv[]){
     
     UDPServer udp_server = UDPServer("server ip");
-    Car followerCar = Car();
+    Car followerCar = Car(stod(argv[1]), stod(argv[2]));
     string unit = "m";
     double distance;
+    clock_t begin = clock();
+    clock_t end;
     while(udp_server.on()){
-        vector<double> lead_coordinates = tokenize(udp_server.receiveMessage());
-        vector<double> lead_speed_deceleration = tokenize(udp_server.receiveMessage());
-        distance = followerCar.calculateDistance(lead_coordinates[0], lead_coordinates[1]);
+        vector<double> lead_data = tokenize(udp_server.receiveMessage());
+        end = clock();
+        followerCar.calculatePosition(double(end - begin));
+        begin = end;
+        distance = followerCar.calculateDistance(lead_data[0]);
         if (distance > 1000){
             distance /= 1000;
             unit = "km";
         }
         cout << "Emergency Brake " + to_string(distance) + " " + unit + " ahead!" << endl;
-        cout << "Speed:" + to_string(lead_speed_deceleration[0]) + 
-            " decelerating from " + to_string(lead_speed_deceleration[1]) + 
-            " to " + to_string(lead_speed_deceleration[2]) + " m/s^2." << endl;
+        cout << "Speed from" + to_string(ms_to_kmh(lead_data[1])) 
+            + " to " + to_string(ms_to_kmh(lead_data[2])) + " km/h" + 
+            + "\nDecelerating from " + to_string(lead_data[3])
+            + " to " + to_string(lead_data[4]) + " m/s^2." << endl;
     }
     return 0;
 }

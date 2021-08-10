@@ -20,25 +20,21 @@ int main(int argc, char *argv[]){
     UDPClient udp_client = UDPClient("server_ip");
     RoadMonitor road_monitor = RoadMonitor();
     char *fname = argv[1];
-    Car leadCar = Car(readFile(fname));
+    Car leadCar = Car(readFile(fname), stod(argv[2]), stod(argv[3]));
     while(leadCar.engineOn()){
-        road_monitor.push_new_data(leadCar.getNextBrakePosition());
         leadCar.calculateDeceleration();
         leadCar.calculateSpeed();
         leadCar.calculatePosition();
+        road_monitor.push_new_data(leadCar.getNextBrakePosition());
         if(road_monitor.emergencyBrake()){
-            char location[MAX_MESSAGE_LEN];
-            pair<int, int> coordinates = leadCar.getCoordinates();
-            sprintf(location, "%d %d", coordinates.first, coordinates.second);
-            udp_client.sendMessage(location);
-            
             char message[MAX_MESSAGE_LEN];
-            double speed = leadCar.getSpeed();
+            double coordinate = leadCar.getCoordinate();
+            pair<double, double> speed = leadCar.getSpeed();
             pair<double, double> deceleration = leadCar.getDeceleration();
-            sprintf(message, "%f %f % f", speed, deceleration.first, deceleration.second);
+            sprintf(message, "%d %f %f %f %f", coordinate, speed.first, speed.second, deceleration.first, deceleration.second);
             udp_client.sendMessage(message);
         }
-        usleep(MILLISECS);
+        sleep(SECONDS);
     }
     udp_client.sendMessage(off);
     return 0;    

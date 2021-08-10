@@ -5,20 +5,21 @@ private:
     vector<double> brakePositions;
     vector<double> deceleration;
     vector<double> speed;
-    vector<pair<int, int>> coordinates;
+    vector<double> coordinates;
     size_t index;
 public:
-    Car();
-    Car(vector<double>);
+    Car(double, double);
+    Car(vector<double>, double, double);
     ~Car();
     bool engineOn();
     double getNextBrakePosition();
-    double getSpeed() const;
+    pair<double, double> getSpeed() const;
     pair<double, double> getDeceleration() const;
-    pair<int, int> getCoordinates() const;
-    double calculateDistance(int, int) const;
+    double getCoordinate() const;
+    double calculateDistance(int);
     void calculateDeceleration();
     void calculateSpeed();
     void calculatePosition();
+    void calculatePosition(double);
 };
 

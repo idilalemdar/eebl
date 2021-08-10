@@ -11,12 +11,12 @@ double RoadMonitor::least_square_sum(){
     double x, y;
     for (list<double>::iterator it = last_five.begin(); it != last_five.end(); ++it){
         y = *it;
-        x = (0.1 * i++);
+        x = (SECONDS * i++);
         sum_y += y;
         sum_x += x;
         sum_x_square += x * x;
         for (int j = 0; j < 5; ++j){
-            sum_xy += (0.1 * j) * y;
+            sum_xy += (SECONDS * j) * y;
         }
         
     }
