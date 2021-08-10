@@ -1,4 +1,3 @@
-#include "dependencies.h"
 #include "UDPClient.hpp"
 
 UDPClient::UDPClient(){
@@ -14,10 +13,11 @@ UDPClient::UDPClient(){
     server_address.sin_addr.s_addr = INADDR_ANY;
 }
 
-int UDPClient::getSocket(){
-    return this->sockfd;
+void UDPClient::sendMessage(char* message){
+    sendto(sockfd, (const char *)message, strlen(message), MSG_CONFIRM,
+                (const struct sockaddr *) &server_address, sizeof(server_address));
 }
 
-struct sockaddr_in* UDPClient::getServerAddress(){
-    return &server_address;
+void UDPClient::close_socket(){
+    close(sockfd);
 }

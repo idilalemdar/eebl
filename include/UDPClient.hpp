@@ -1,4 +1,4 @@
-#include "dependencies.h"
+#include "dependencies.hpp"
 
 class UDPClient{
     private:
@@ -6,6 +6,6 @@ class UDPClient{
         struct sockaddr_in server_address;
     public:
         UDPClient();
-        int getSocket();
-        struct sockaddr_in* getServerAddress();
+        void sendMessage(char*);
+        void close_socket();
 };

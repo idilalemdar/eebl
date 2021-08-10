@@ -1,5 +1,5 @@
-#ifndef DEPENDENCIES_H
-#define DEPENDENCIES_H
+#ifndef DEPENDENCIES_HPP
+#define DEPENDENCIES_HPP
 
 #define PORT 8080
 #define MAXLEN 1024

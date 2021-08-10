@@ -1,4 +1,4 @@
-#include "../include/depencdencies.hpp"
+#include "dependencies.hpp"
 
 double calculateDistance(int x1, int y1, int x2, int y2){
     int x_distance = x1 - x2;
@@ -34,6 +34,6 @@ int main(int argc, char *argv[]){
         n = recvfrom(sockfd, (char *)buffer, MAXLEN, 
                 MSG_WAITALL, (struct sockaddr *) &cliaddr, (socklen_t *)&len);
         buffer[n] = '\0';
-        printf("%s\n", buffer);
+        cout << buffer << endl;
     }
 }

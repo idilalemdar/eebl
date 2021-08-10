@@ -1,4 +1,3 @@
-#include "dependencies.h"
 #include "UDPClient.hpp"
 #include "RoadMonitor.hpp"
 
@@ -20,22 +19,27 @@ vector<double> readFile(string fname){
 }
 
 int main(int argc, char *argv[]){
-    char message[MAXLEN];
     UDPClient udp_client = UDPClient();
     RoadMonitor road_monitor = RoadMonitor();
 
     vector<double> brakePositions = readFile("brake_positions.txt");
     int i = 0;
     int sz = brakePositions.size();
-    
     while(engineOn(i, sz)){
+        char message[MAXLEN];
+        vector<int> coordinates = road_monitor.getCoordinates();
+        sprintf(message, "%d %d", coordinates[0], coordinates[1]);
+        udp_client.sendMessage(message);
+        road_monitor.push_new_data(brakePositions[i++]);
         if(road_monitor.emergencyBrake()){
-            sprintf(message, );
-            sendto(udp_client.getSocket(), (const char *)message, strlen(message), MSG_CONFIRM,
-                (const struct sockaddr *) udp_client.getServerAddress(), *udp_client.getServerAddress());
+            double speed = road_monitor.getInitialSpeed();
+            vector<double> deceleration = road_monitor.getDeceleration();
+            sprintf(message, "Emergency Brake!\nBrake at speed:%f\nDeceleration rate:%f m/s^2 to %f m/s^2 in half a second",
+                speed, deceleration[0], deceleration[1]);
+            udp_client.sendMessage(message);
         }
         usleep(MILLISECS);
     }
-    close(sockfd);
+    udp_client.close_socket();
     return 0;    
 }
