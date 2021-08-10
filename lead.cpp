@@ -26,13 +26,18 @@ int main(int argc, char *argv[]){
         leadCar.calculateSpeed();
         leadCar.calculatePosition();
         road_monitor.push_new_data(leadCar.getNextBrakePosition());
+        pair<double, double> speed = leadCar.getSpeed();
         if(road_monitor.emergencyBrake()){
             char message[MAX_MESSAGE_LEN];
             double coordinate = leadCar.getCoordinate();
-            pair<double, double> speed = leadCar.getSpeed();
             pair<double, double> deceleration = leadCar.getDeceleration();
-            sprintf(message, "%d %f %f %f %f", coordinate, speed.first, speed.second, deceleration.first, deceleration.second);
+            sprintf(message, "%d %lf %lf %lf %lf", coordinate, speed.first, speed.second, deceleration.first, deceleration.second);
             udp_client.sendMessage(message);
+        }
+        else{
+            char v[MAX_MESSAGE_LEN];
+            sprintf(v, "%lf", speed);
+            udp_client.sendMessage(v);
         }
         sleep(SECONDS);
     }

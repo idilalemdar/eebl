@@ -19,7 +19,8 @@ public:
     double calculateDistance(int);
     void calculateDeceleration();
     void calculateSpeed();
+    void setFollowerSpeed(double);
+    void setFollowerCoordinate();
     void calculatePosition();
-    void calculatePosition(double);
 };
 

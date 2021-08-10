@@ -50,12 +50,16 @@ void Car::calculateSpeed(){
     speed.push_back(last_speed - deceleration[index] * SECONDS);
 }
 
+void Car::setFollowerSpeed(double lead_speed){
+    speed.push_back(lead_speed);
+}
+
+void Car::setFollowerCoordinate(){
+    double last_position = coordinates[coordinates.size() - 1];
+    coordinates.push_back(last_position + speed[speed.size() - 1] * SECONDS);
+}
+
 void Car::calculatePosition(){
     double last_position = coordinates[index];
     coordinates.push_back(last_position + speed[index] * SECONDS);
-}
-
-void Car::calculatePosition(double time_diff){
-    double last_position = coordinates[index];
-    coordinates.push_back(last_position * speed[index] * time_diff);
 }

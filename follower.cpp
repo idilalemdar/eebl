@@ -19,23 +19,25 @@ int main(int argc, char *argv[]){
     Car followerCar = Car(stod(argv[1]), stod(argv[2]));
     string unit = "m";
     double distance;
-    clock_t begin = clock();
-    clock_t end;
     while(udp_server.on()){
-        vector<double> lead_data = tokenize(udp_server.receiveMessage());
-        end = clock();
-        followerCar.calculatePosition(double(end - begin));
-        begin = end;
-        distance = followerCar.calculateDistance(lead_data[0]);
-        if (distance > 1000){
-            distance /= 1000;
-            unit = "km";
+        string msg = udp_server.receiveMessage();
+        vector<double> lead_data = tokenize(msg);
+        if(lead_data.size() == 0){
+            followerCar.setFollowerSpeed(stod(msg));
+            followerCar.setFollowerCoordinate();
         }
-        cout << "Emergency Brake " + to_string(distance) + " " + unit + " ahead!" << endl;
-        cout << "Speed from" + to_string(ms_to_kmh(lead_data[1])) 
-            + " to " + to_string(ms_to_kmh(lead_data[2])) + " km/h" + 
-            + "\nDecelerating from " + to_string(lead_data[3])
-            + " to " + to_string(lead_data[4]) + " m/s^2." << endl;
+        else {
+            distance = followerCar.calculateDistance(lead_data[0]);
+            if (distance > 1000){
+                distance /= 1000;
+                unit = "km";
+            }
+            cout << "Emergency Brake " + to_string(distance) + " " + unit + " ahead!" << endl;
+            cout << "Speed from" + to_string(ms_to_kmh(lead_data[1])) 
+                + " to " + to_string(ms_to_kmh(lead_data[2])) + " km/h" + 
+                + "\nDecelerating from " + to_string(lead_data[3])
+                + " to " + to_string(lead_data[4]) + " m/s^2." << endl;
+        }
     }
     return 0;
 }
