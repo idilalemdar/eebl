@@ -1,9 +1,6 @@
 #include "UDPClient.hpp"
 #include "RoadMonitor.hpp"
-
-bool engineOn(int i, int sz){
-    return i < sz;
-}
+#include "Car.hpp"
 
 vector<double> readFile(string fname){
     ifstream datafile(fname);
@@ -19,27 +16,30 @@ vector<double> readFile(string fname){
 }
 
 int main(int argc, char *argv[]){
-    UDPClient udp_client = UDPClient();
+    char off[4] = "OFF";
+    UDPClient udp_client = UDPClient("server_ip");
     RoadMonitor road_monitor = RoadMonitor();
-
-    vector<double> brakePositions = readFile("brake_positions.txt");
-    int i = 0;
-    int sz = brakePositions.size();
-    while(engineOn(i, sz)){
-        char message[MAXLEN];
-        vector<int> coordinates = road_monitor.getCoordinates();
-        sprintf(message, "%d %d", coordinates[0], coordinates[1]);
-        udp_client.sendMessage(message);
-        road_monitor.push_new_data(brakePositions[i++]);
+    char *fname = argv[1];
+    Car leadCar = Car(readFile(fname));
+    while(leadCar.engineOn()){
+        road_monitor.push_new_data(leadCar.getNextBrakePosition());
+        leadCar.calculateDeceleration();
+        leadCar.calculateSpeed();
+        leadCar.calculatePosition();
         if(road_monitor.emergencyBrake()){
-            double speed = road_monitor.getInitialSpeed();
-            vector<double> deceleration = road_monitor.getDeceleration();
-            sprintf(message, "Emergency Brake!\nBrake at speed:%f\nDeceleration rate:%f m/s^2 to %f m/s^2 in half a second",
-                speed, deceleration[0], deceleration[1]);
+            char location[MAX_MESSAGE_LEN];
+            pair<int, int> coordinates = leadCar.getCoordinates();
+            sprintf(location, "%d %d", coordinates.first, coordinates.second);
+            udp_client.sendMessage(location);
+            
+            char message[MAX_MESSAGE_LEN];
+            double speed = leadCar.getSpeed();
+            pair<double, double> deceleration = leadCar.getDeceleration();
+            sprintf(message, "%f %f % f", speed, deceleration.first, deceleration.second);
             udp_client.sendMessage(message);
         }
         usleep(MILLISECS);
     }
-    udp_client.close_socket();
+    udp_client.sendMessage(off);
     return 0;    
 }

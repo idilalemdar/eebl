@@ -1,8 +1,9 @@
 #ifndef DEPENDENCIES_HPP
 #define DEPENDENCIES_HPP
 
-#define PORT 8080
-#define MAXLEN 1024
+#define PORT_SERVER 8080
+#define PORT_CLIENT 8080
+#define MAX_MESSAGE_LEN 1024
 #define MILLISECS 100000
 #define SLOPE 0.8
 
