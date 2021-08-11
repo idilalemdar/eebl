@@ -8,19 +8,17 @@ vector<double> readFile(string fname){
     string line;
     if (datafile.is_open()){
         while (getline(datafile,line)){
-            tokens.push_back(stod(line));
+            tokens.push_back(stod(line) / 100); // normalize brake position
         }
         datafile.close();
     }
     return tokens;
 }
 
-int main(int argc, char *argv[]){
+void monitor(Car& leadCar){
     char off[4] = "OFF";
-    UDPClient udp_client = UDPClient("server_ip");
+    UDPClient udp_client = UDPClient("144.122.185.55");
     RoadMonitor road_monitor = RoadMonitor();
-    char *fname = argv[1];
-    Car leadCar = Car(readFile(fname), stod(argv[2]), stod(argv[3]));
     while(leadCar.engineOn()){
         leadCar.calculateDeceleration();
         leadCar.calculateSpeed();
@@ -34,13 +32,21 @@ int main(int argc, char *argv[]){
             sprintf(message, "%d %lf %lf %lf %lf", coordinate, speed.first, speed.second, deceleration.first, deceleration.second);
             udp_client.sendMessage(message);
         }
-        else{
+        else {
             char v[MAX_MESSAGE_LEN];
-            sprintf(v, "%lf", speed);
+            sprintf(v, "%lf", speed.first); // send data from 500 ms ago, as it is the minimal human reaction time
             udp_client.sendMessage(v);
         }
         sleep(SECONDS);
     }
     udp_client.sendMessage(off);
+}
+
+int main(int argc, char *argv[]){
+    char *fname = argv[1];
+    Car leadCar = Car(readFile(fname), stod(argv[2]), stod(argv[3]));
+    
+    monitor(leadCar);
+    
     return 0;    
 }

@@ -3,9 +3,9 @@
 
 vector<double> tokenize(string original){
     vector<double> tokens;
-    int index;
-    int start = 0;
-    while ((index = original.find(" ", start)) > 0){
+    size_t index;
+    size_t start = 0;
+    while ((index = original.find(" ", start)) != string::npos){
         string sub = original.substr(start, index);
         tokens.push_back(stod(sub));
         start += sub.size() + 1;
@@ -13,14 +13,13 @@ vector<double> tokenize(string original){
     return tokens;
 }
 
-int main(int argc, char *argv[]){
-    
-    UDPServer udp_server = UDPServer("server ip");
-    Car followerCar = Car(stod(argv[1]), stod(argv[2]));
+void listen(Car& followerCar){
+    UDPServer udp_server = UDPServer("144.122.185.55");
     string unit = "m";
     double distance;
-    while(udp_server.on()){
+    while(true){
         string msg = udp_server.receiveMessage();
+        if(msg == "OFF") break;
         vector<double> lead_data = tokenize(msg);
         if(lead_data.size() == 0){
             followerCar.setFollowerSpeed(stod(msg));
@@ -37,7 +36,15 @@ int main(int argc, char *argv[]){
                 + " to " + to_string(ms_to_kmh(lead_data[2])) + " km/h" + 
                 + "\nDecelerating from " + to_string(lead_data[3])
                 + " to " + to_string(lead_data[4]) + " m/s^2." << endl;
+            followerCar.setFollowerSpeed(lead_data[1]);
+            followerCar.setFollowerCoordinate();
         }
     }
+}
+int main(int argc, char *argv[]){
+    Car followerCar = Car(stod(argv[1]), stod(argv[2]));
+
+    listen(followerCar);
+
     return 0;
 }

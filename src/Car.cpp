@@ -25,7 +25,7 @@ double Car::calculateDistance(int x){
 
 pair<double, double> Car::getSpeed() const{
     pair<double, double> start_end;
-    start_end.first = speed[index - 4];
+    start_end.first = index >= 4 ? speed[index - 4] : speed[index];
     start_end.second = speed[index];
     return start_end;
 }

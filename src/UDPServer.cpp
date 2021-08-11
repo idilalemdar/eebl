@@ -11,7 +11,7 @@ UDPServer::UDPServer(const char* address){
       
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = inet_addr(address);
-    servaddr.sin_port = htons(PORT_SERVER);
+    servaddr.sin_port = htons(PORT);
 
     if(bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0){
         perror("bind failed");
@@ -23,16 +23,12 @@ UDPServer::~UDPServer(){
     close(sockfd);
 }
 
-bool UDPServer::on(){
-    return msg != "OFF";
-}
-
 string UDPServer::receiveMessage(){
     int len = sizeof(cliaddr);
     char buffer[MAX_MESSAGE_LEN];
     int n = recvfrom(sockfd, (char *)buffer, MAX_MESSAGE_LEN, 
                 MSG_WAITALL, (struct sockaddr *) &cliaddr, (socklen_t *)&len);
     buffer[n] = '\0';
-    msg = buffer;
+    string msg = buffer;
     return msg;
 }
