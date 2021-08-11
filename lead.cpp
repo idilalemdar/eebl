@@ -9,7 +9,7 @@ vector<double> readFile(string fname){
     string line;
     if (datafile.is_open()){
         while (getline(datafile,line)){
-            tokens.push_back(stod(line) / 100); // normalize brake position
+            tokens.push_back(stod(line));
         }
         datafile.close();
     }
@@ -24,8 +24,8 @@ void monitor(Car& leadCar){
         leadCar.calculateDeceleration();
         leadCar.calculateSpeed();
         leadCar.calculatePosition();
-        road_monitor.push_new_data(leadCar.getNextBrakePosition());
         pair<double, double> speed = leadCar.getSpeed();
+        road_monitor.push_new_data(leadCar.getNextBrakePosition(), speed.second);
         if(road_monitor.emergencyBrake()){
             char message[MAX_MESSAGE_LEN];
             double coordinate = leadCar.getCoordinate();
@@ -38,7 +38,7 @@ void monitor(Car& leadCar){
             sprintf(v, "%lf", speed.first); // send data from 500 ms ago, as it is the minimal human reaction time
             udp_client.sendMessage(v);
         }
-        sleep(SECONDS);
+        usleep(SECONDS * 1000000);
     }
     udp_client.sendMessage(off);
 }

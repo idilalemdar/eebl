@@ -5,31 +5,36 @@ RoadMonitor::RoadMonitor(){
 }
 
 double RoadMonitor::least_square_sum(){
-    double sum_x, sum_xy, sum_x_square, sum_y;
-    sum_x = sum_xy = sum_x_square = sum_y = 0;
     int i = 0;
     double x, y;
+    double numerator, denominator;
+    numerator = denominator = 0;
+    double mean_y;
+    double sum = 0;
+    for (list<double>::iterator it = last_five.begin(); it != last_five.end(); ++it){
+        sum += *it;
+    }
+    mean_y = sum / 5;
     for (list<double>::iterator it = last_five.begin(); it != last_five.end(); ++it){
         y = *it;
         x = (SECONDS * i++);
-        sum_y += y;
-        sum_x += x;
-        sum_x_square += x * x;
-        for (int j = 0; j < 5; ++j){
-            sum_xy += (SECONDS * j) * y;
-        }
-        
+        numerator += (x - 0.2) * (y - mean_y);
+        denominator += (x - 0.2) * (x - 0.2);
     }
-    return (5 * sum_xy - sum_x * sum_y) / 
-        (5 * sum_x_square - sum_x * sum_x);
+    double slope = numerator / denominator;
+    cout << "slope: " << slope << endl;
+    return slope;
 }
 
 bool RoadMonitor::emergencyBrake(){
-    return this->least_square_sum() >= SLOPE && this->speed >= 15;
+    cout << "road monitor speed: " << speed * MS_KMH << endl;
+    return this->least_square_sum() >= SLOPE && this->speed >= 4.166666666666667;
 }
 
-void RoadMonitor::push_new_data(double brake_position){
+void RoadMonitor::push_new_data(double brake_position, double new_speed){
     last_five.push_back(brake_position);
-    if(4 > i++)
+    if(last_five.size() == 6){
         last_five.pop_front();
+    }
+    speed = new_speed;
 }

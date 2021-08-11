@@ -26,10 +26,10 @@ for i in range(1,51):
     fd.write("0\n")
 
 for i in range(1,31): # brake position line's slope = 30 degrees
-    if 1/15 * i < 0.5:
+    if 1/15 * i < 1:
         fd.write(str(1/15 * i) + "\n")
     else:
-        fd.write("0.5\n")
+        fd.write("1\n")
 
 fd.close()
 
@@ -46,5 +46,4 @@ for i in range(1,41): # brake position line's slope = 30 degrees
         fd.write(str(0.1 * i**2) + "\n")
     else:
         fd.write("1\n")
-
 fd.close()

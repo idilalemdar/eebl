@@ -14,7 +14,7 @@ UDPClient::UDPClient(const char* address){
 }
 
 void UDPClient::sendMessage(char* message){
-    sendto(sockfd, (const char *)message, strlen(message), MSG_CONFIRM,
+    sendto(sockfd, (const char *)message, strlen(message), 0,
                 (const struct sockaddr *) &server_address, sizeof(server_address));
 }
 

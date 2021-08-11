@@ -18,6 +18,7 @@ void listen(Car& followerCar){
     UDPServer udp_server = UDPServer("144.122.185.55");
     string unit = "m";
     double distance;
+    cout << "Follower car is listening..." << endl;
     while(true){
         string msg = udp_server.receiveMessage();
         if(msg == "OFF") break;

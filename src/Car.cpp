@@ -17,6 +17,8 @@ Car::Car(double init_speed, double init_pos){
 Car::~Car(){}
 
 bool Car::engineOn(){
+    cout << brakePositions.size() << endl;
+    cout << index << endl;
     return index < brakePositions.size();
 }
 
@@ -53,7 +55,9 @@ void Car::calculateDeceleration(){
 
 void Car::calculateSpeed(){
     double last_speed = speed[index];
-    speed.push_back(last_speed - deceleration[index] * SECONDS);
+    double new_speed = last_speed - deceleration[index] * SECONDS;
+    if(new_speed < 0) new_speed = 0;
+    speed.push_back(new_speed);
 }
 
 void Car::setFollowerSpeed(double lead_speed){

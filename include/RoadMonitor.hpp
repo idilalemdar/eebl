@@ -9,5 +9,5 @@ public:
     RoadMonitor();
     double least_square_sum();
     bool emergencyBrake();
-    void push_new_data(double);
+    void push_new_data(double, double);
 };
