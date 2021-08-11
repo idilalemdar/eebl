@@ -22,5 +22,7 @@ public:
     void setFollowerSpeed(double);
     void setFollowerCoordinate();
     void calculatePosition();
+    double kmh_to_ms(double);
+    double ms_to_kmh(double);
 };
 

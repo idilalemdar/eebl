@@ -23,14 +23,6 @@
 #include <cmath>
 #include <ctime>
 
-double kmh_to_ms(double kmh){
-    return kmh * (1.0 / MS_KMH);
-}
-
-double ms_to_kmh(double ms){
-    return ms * MS_KMH;
-}
-
 using namespace std;
 
 #endif

@@ -1,6 +1,7 @@
 #include "UDPServer.hpp"
 #include "Car.hpp"
 
+
 vector<double> tokenize(string original){
     vector<double> tokens;
     size_t index;
@@ -32,8 +33,8 @@ void listen(Car& followerCar){
                 unit = "km";
             }
             cout << "Emergency Brake " + to_string(distance) + " " + unit + " ahead!" << endl;
-            cout << "Speed from" + to_string(ms_to_kmh(lead_data[1])) 
-                + " to " + to_string(ms_to_kmh(lead_data[2])) + " km/h" + 
+            cout << "Speed from" + to_string(followerCar.ms_to_kmh(lead_data[1])) 
+                + " to " + to_string(followerCar.ms_to_kmh(lead_data[2])) + " km/h" + 
                 + "\nDecelerating from " + to_string(lead_data[3])
                 + " to " + to_string(lead_data[4]) + " m/s^2." << endl;
             followerCar.setFollowerSpeed(lead_data[1]);

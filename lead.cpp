@@ -2,6 +2,7 @@
 #include "RoadMonitor.hpp"
 #include "Car.hpp"
 
+
 vector<double> readFile(string fname){
     ifstream datafile(fname);
     vector<double> tokens;
@@ -29,7 +30,7 @@ void monitor(Car& leadCar){
             char message[MAX_MESSAGE_LEN];
             double coordinate = leadCar.getCoordinate();
             pair<double, double> deceleration = leadCar.getDeceleration();
-            sprintf(message, "%d %lf %lf %lf %lf", coordinate, speed.first, speed.second, deceleration.first, deceleration.second);
+            sprintf(message, "%f %lf %lf %lf %lf", coordinate, speed.first, speed.second, deceleration.first, deceleration.second);
             udp_client.sendMessage(message);
         }
         else {

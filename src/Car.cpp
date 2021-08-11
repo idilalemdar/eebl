@@ -8,6 +8,12 @@ Car::Car(vector<double> brakePositions, double init_speed, double init_pos){
     index = 0;
 }
 
+Car::Car(double init_speed, double init_pos){
+    speed.push_back(kmh_to_ms(init_speed));
+    coordinates.push_back(init_pos);
+    index = 0;
+}
+
 Car::~Car(){}
 
 bool Car::engineOn(){
@@ -62,4 +68,12 @@ void Car::setFollowerCoordinate(){
 void Car::calculatePosition(){
     double last_position = coordinates[index];
     coordinates.push_back(last_position + speed[index] * SECONDS);
+}
+
+double Car::kmh_to_ms(double kmh){
+    return kmh * (1.0 / MS_KMH);
+}
+
+double Car::ms_to_kmh(double ms){
+    return ms * MS_KMH;
 }
