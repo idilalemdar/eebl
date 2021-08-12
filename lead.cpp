@@ -18,7 +18,7 @@ vector<double> readFile(string fname){
 
 void monitor(Car& leadCar){
     char off[4] = "OFF";
-    UDPClient udp_client = UDPClient("144.122.185.55");
+    UDPClient udp_client = UDPClient();
     RoadMonitor road_monitor = RoadMonitor();
     while(leadCar.engineOn()){
         leadCar.calculateDeceleration();

@@ -17,8 +17,6 @@ Car::Car(double init_speed, double init_pos){
 Car::~Car(){}
 
 bool Car::engineOn(){
-    cout << brakePositions.size() << endl;
-    cout << index << endl;
     return index < brakePositions.size();
 }
 

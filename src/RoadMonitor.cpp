@@ -22,12 +22,10 @@ double RoadMonitor::least_square_sum(){
         denominator += (x - 0.2) * (x - 0.2);
     }
     double slope = numerator / denominator;
-    cout << "slope: " << slope << endl;
     return slope;
 }
 
 bool RoadMonitor::emergencyBrake(){
-    cout << "road monitor speed: " << speed * MS_KMH << endl;
     return this->least_square_sum() >= SLOPE && this->speed >= 4.166666666666667;
 }
 
