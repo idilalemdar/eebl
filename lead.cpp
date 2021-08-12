@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
     char *fname = argv[1];
     Car leadCar = Car(readFile(fname), stod(argv[2]), stod(argv[3]));
     
-    monitor(leadCar, argv[3]);
+    monitor(leadCar, argv[4]);
     
     return 0;    
 }
