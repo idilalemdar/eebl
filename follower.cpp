@@ -12,8 +12,8 @@ vector<double> tokenize(string original){
     return tokens;
 }
 
-void listen(Car& followerCar){
-    UDPServer udp_server = UDPServer();
+void listen(Car& followerCar, const char* ip){
+    UDPServer udp_server = UDPServer(ip);
     string unit = "m";
     double distance;
     cout << "Follower car is listening..." << endl;
@@ -43,7 +43,7 @@ void listen(Car& followerCar){
 int main(int argc, char *argv[]){
     Car followerCar = Car(stod(argv[1]), stod(argv[2]));
 
-    listen(followerCar);
+    listen(followerCar, argv[3]);
 
     return 0;
 }

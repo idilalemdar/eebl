@@ -1,6 +1,6 @@
 #include "UDPServer.hpp"
 
-UDPServer::UDPServer(){
+UDPServer::UDPServer(const char* address){
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
         perror("Socket creation failed.");
         exit(EXIT_FAILURE);
@@ -10,7 +10,7 @@ UDPServer::UDPServer(){
     memset(&cliaddr, 0, sizeof(cliaddr));
       
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("192.168.43.228");
+    servaddr.sin_addr.s_addr = inet_addr(address);
     servaddr.sin_port = htons(PORT);
 
     if(bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0){

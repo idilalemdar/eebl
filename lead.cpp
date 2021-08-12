@@ -16,9 +16,9 @@ vector<double> readFile(string fname){
     return tokens;
 }
 
-void monitor(Car& leadCar){
+void monitor(Car& leadCar, const char* ip){
     char off[4] = "OFF";
-    UDPClient udp_client = UDPClient();
+    UDPClient udp_client = UDPClient(ip);
     RoadMonitor road_monitor = RoadMonitor();
     while(leadCar.engineOn()){
         leadCar.calculateDeceleration();
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
     char *fname = argv[1];
     Car leadCar = Car(readFile(fname), stod(argv[2]), stod(argv[3]));
     
-    monitor(leadCar);
+    monitor(leadCar, argv[3]);
     
     return 0;    
 }

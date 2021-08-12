@@ -5,7 +5,7 @@ private:
     int sockfd;
     struct sockaddr_in servaddr, cliaddr;
 public:
-    UDPServer();
+    UDPServer(const char*);
     ~UDPServer();
     string receiveMessage();
 };
