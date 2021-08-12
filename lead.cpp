@@ -29,8 +29,7 @@ void monitor(Car& leadCar){
         if(road_monitor.emergencyBrake()){
             char message[MAX_MESSAGE_LEN];
             double coordinate = leadCar.getCoordinate();
-            pair<double, double> deceleration = leadCar.getDeceleration();
-            sprintf(message, "%f %lf %lf %lf %lf", coordinate, speed.first, speed.second, deceleration.first, deceleration.second);
+            sprintf(message, "%f %lf %lf", coordinate, speed.first, speed.second);
             udp_client.sendMessage(message);
         }
         else {

@@ -38,8 +38,13 @@ pair<double, double> Car::getSpeed() const{
 
 pair<double, double> Car::getDeceleration() const{
     pair<double, double> start_end;
-    start_end.first = deceleration[index - 4];
-    start_end.second = deceleration[index];
+    start_end.first = deceleration[deceleration.size() - 5];
+    start_end.second = deceleration[deceleration.size() - 1];
+    for (size_t i = 0; i < deceleration.size(); i++)
+    {
+       cout << deceleration[i] << endl;
+    }
+    
     return start_end;
 }
 
@@ -52,10 +57,11 @@ void Car::calculateDeceleration(){
 }
 
 void Car::calculateSpeed(){
-    double last_speed = speed[index];
-    double new_speed = last_speed - deceleration[index] * SECONDS;
+    double last_speed = speed[speed.size() - 1];
+    double new_speed = last_speed - deceleration[deceleration.size() - 1] * SECONDS;
     if(new_speed < 0) new_speed = 0;
     speed.push_back(new_speed);
+    cout << new_speed << endl;
 }
 
 void Car::setFollowerSpeed(double lead_speed){
@@ -69,7 +75,7 @@ void Car::setFollowerCoordinate(){
 
 void Car::calculatePosition(){
     double last_position = coordinates[index];
-    coordinates.push_back(last_position + speed[index] * SECONDS);
+    coordinates.push_back(last_position + speed[speed.size() - 1] * SECONDS);
 }
 
 double Car::kmh_to_ms(double kmh){
