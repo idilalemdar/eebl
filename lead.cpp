@@ -30,10 +30,8 @@ void monitor(Car& leadCar){
             char message[MAX_MESSAGE_LEN];
             double coordinate = leadCar.getCoordinate();
             pair<double, double> deceleration  = leadCar.getDeceleration();
-            cout << speed.first << " " << speed.second << endl;
             sprintf(message, "%lf %lf %lf %lf %lf", coordinate, speed.first, speed.second, 
                 deceleration.first, deceleration.second);
-            cout << message << endl;
             udp_client.sendMessage(message);
         }
         else {

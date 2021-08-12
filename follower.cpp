@@ -21,7 +21,7 @@ void listen(Car& followerCar){
         string msg = udp_server.receiveMessage();
         if(msg == "OFF") break;
         vector<double> lead_data = tokenize(msg);
-        if(lead_data.size() == 0){
+        if(lead_data.size() == 1){
             followerCar.setFollowerSpeed(stod(msg));
             followerCar.setFollowerCoordinate();
         }
