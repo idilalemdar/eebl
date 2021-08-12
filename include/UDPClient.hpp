@@ -7,5 +7,5 @@ private:
 public:
     UDPClient();
     ~UDPClient();
-    void sendMessage(char*);
+    size_t sendMessage(char*);
 };

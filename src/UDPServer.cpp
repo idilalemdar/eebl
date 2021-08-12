@@ -10,15 +10,13 @@ UDPServer::UDPServer(){
     memset(&cliaddr, 0, sizeof(cliaddr));
       
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = INADDR_ANY;
+    servaddr.sin_addr.s_addr = inet_addr("192.168.43.228");
     servaddr.sin_port = htons(PORT);
 
     if(bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0){
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
-    cout << "server address: " << servaddr.sin_addr.s_addr << endl;
-    cout << "port: " << PORT << endl;
 }
 
 UDPServer::~UDPServer(){
@@ -32,6 +30,5 @@ string UDPServer::receiveMessage(){
                 MSG_WAITALL, (struct sockaddr *) &cliaddr, (socklen_t *)&len);
     buffer[n] = '\0';
     string msg = buffer;
-    cout << "msg received by follower car: " << msg << endl;
     return msg;
 }
