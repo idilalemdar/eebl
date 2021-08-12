@@ -22,6 +22,7 @@
 #include <fstream>
 #include <cmath>
 #include <ctime>
+#include <bits/stdc++.h>
 
 using namespace std;
 

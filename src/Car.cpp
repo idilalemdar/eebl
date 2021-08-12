@@ -40,10 +40,6 @@ pair<double, double> Car::getDeceleration() const{
     pair<double, double> start_end;
     start_end.first = deceleration[deceleration.size() - 5];
     start_end.second = deceleration[deceleration.size() - 1];
-    for (size_t i = 0; i < deceleration.size(); i++)
-    {
-       cout << deceleration[i] << endl;
-    }
     
     return start_end;
 }
@@ -61,7 +57,6 @@ void Car::calculateSpeed(){
     double new_speed = last_speed - deceleration[deceleration.size() - 1] * SECONDS;
     if(new_speed < 0) new_speed = 0;
     speed.push_back(new_speed);
-    cout << new_speed << endl;
 }
 
 void Car::setFollowerSpeed(double lead_speed){

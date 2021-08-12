@@ -4,12 +4,10 @@
 
 vector<double> tokenize(string original){
     vector<double> tokens;
-    size_t index;
-    size_t start = 0;
-    while ((index = original.find(" ", start)) != string::npos){
-        string sub = original.substr(start, index);
-        tokens.push_back(stod(sub));
-        start += sub.size() + 1;
+    stringstream check1(original);
+    string intermediate;
+    while(getline(check1, intermediate, ' ')){
+        tokens.push_back(stod(intermediate));
     }
     return tokens;
 }
@@ -33,9 +31,10 @@ void listen(Car& followerCar){
                 distance /= 1000;
                 unit = "km";
             }
-            cout << "Emergency Brake " + to_string(distance) + " " + unit + " ahead!" << endl;
+            cout << "Emergency Brake " << distance << " " << unit << " ahead!" << endl;
             cout << "Speed drops from " << followerCar.ms_to_kmh(lead_data[1])
-                << " to " << followerCar.ms_to_kmh(lead_data[2]) << " km/h" << endl;
+                << " to " << followerCar.ms_to_kmh(lead_data[2]) << " km/h in half a second" << endl;
+            cout << "Deceleration increases from " << lead_data[3] << " to " << lead_data[4] << " m/s^2." << endl;
             followerCar.setFollowerSpeed(lead_data[1]);
             followerCar.setFollowerCoordinate();
         }
