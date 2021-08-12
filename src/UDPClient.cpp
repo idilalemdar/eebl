@@ -11,6 +11,7 @@ UDPClient::UDPClient(const char* address){
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = inet_addr(address);
     server_address.sin_port = htons(PORT);
+    cout << "server address: " << server_address.sin_addr.s_addr << endl;
 }
 
 void UDPClient::sendMessage(char* message){

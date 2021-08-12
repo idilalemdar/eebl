@@ -4,7 +4,7 @@
 #define PORT 8080
 #define MAX_MESSAGE_LEN 1024
 #define SECONDS 0.1
-#define SLOPE 0.8
+#define SLOPE 1
 #define MS_KMH 3.6
 
 #include <stdio.h>

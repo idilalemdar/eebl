@@ -17,6 +17,7 @@ UDPServer::UDPServer(const char* address){
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
+    cout << "server address: " << servaddr.sin_addr.s_addr << endl;
 }
 
 UDPServer::~UDPServer(){
@@ -24,11 +25,12 @@ UDPServer::~UDPServer(){
 }
 
 string UDPServer::receiveMessage(){
-    int len = sizeof(cliaddr);
+    socklen_t len = sizeof(cliaddr);
     char buffer[MAX_MESSAGE_LEN];
     int n = recvfrom(sockfd, (char *)buffer, MAX_MESSAGE_LEN, 
                 MSG_WAITALL, (struct sockaddr *) &cliaddr, (socklen_t *)&len);
     buffer[n] = '\0';
     string msg = buffer;
+    cout << "msg received by follower car: " << msg << endl;
     return msg;
 }

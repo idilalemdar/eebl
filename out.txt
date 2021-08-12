@@ -1,0 +1,323 @@
+server address: 934902416
+80
+0
+road monitor speed: 70
+slope: 0
+80
+1
+road monitor speed: 70
+slope: 0
+80
+2
+road monitor speed: 70
+slope: 0
+80
+3
+road monitor speed: 70
+slope: 0
+80
+4
+road monitor speed: 70
+slope: 0
+80
+5
+road monitor speed: 70
+slope: 0
+80
+6
+road monitor speed: 70
+slope: 0
+80
+7
+road monitor speed: 70
+slope: 0
+80
+8
+road monitor speed: 70
+slope: 0
+80
+9
+road monitor speed: 70
+slope: 0
+80
+10
+road monitor speed: 70
+slope: 0
+80
+11
+road monitor speed: 70
+slope: 0
+80
+12
+road monitor speed: 70
+slope: 0
+80
+13
+road monitor speed: 70
+slope: 0
+80
+14
+road monitor speed: 70
+slope: 0
+80
+15
+road monitor speed: 70
+slope: 0
+80
+16
+road monitor speed: 70
+slope: 0
+80
+17
+road monitor speed: 70
+slope: 0
+80
+18
+road monitor speed: 70
+slope: 0
+80
+19
+road monitor speed: 70
+slope: 0
+80
+20
+road monitor speed: 70
+slope: 0
+80
+21
+road monitor speed: 70
+slope: 0
+80
+22
+road monitor speed: 70
+slope: 0
+80
+23
+road monitor speed: 70
+slope: 0
+80
+24
+road monitor speed: 70
+slope: 0
+80
+25
+road monitor speed: 70
+slope: 0
+80
+26
+road monitor speed: 70
+slope: 0
+80
+27
+road monitor speed: 70
+slope: 0
+80
+28
+road monitor speed: 70
+slope: 0
+80
+29
+road monitor speed: 70
+slope: 0
+80
+30
+road monitor speed: 70
+slope: 0
+80
+31
+road monitor speed: 70
+slope: 0
+80
+32
+road monitor speed: 70
+slope: 0
+80
+33
+road monitor speed: 70
+slope: 0
+80
+34
+road monitor speed: 70
+slope: 0
+80
+35
+road monitor speed: 70
+slope: 0
+80
+36
+road monitor speed: 70
+slope: 0
+80
+37
+road monitor speed: 70
+slope: 0
+80
+38
+road monitor speed: 70
+slope: 0
+80
+39
+road monitor speed: 70
+slope: 0
+80
+40
+road monitor speed: 70
+slope: 0
+80
+41
+road monitor speed: 70
+slope: 0
+80
+42
+road monitor speed: 70
+slope: 0
+80
+43
+road monitor speed: 70
+slope: 0
+80
+44
+road monitor speed: 70
+slope: 0
+80
+45
+road monitor speed: 70
+slope: 0
+80
+46
+road monitor speed: 70
+slope: 0
+80
+47
+road monitor speed: 70
+slope: 0
+80
+48
+road monitor speed: 70
+slope: 0
+80
+49
+road monitor speed: 70
+slope: 0
+80
+50
+road monitor speed: 70
+slope: 0.2
+80
+51
+road monitor speed: 69.64
+slope: 0.5
+80
+52
+road monitor speed: 68.92
+slope: 0.8
+80
+53
+road monitor speed: 67.84
+slope: 1
+80
+54
+road monitor speed: 66.4
+slope: 1
+80
+55
+road monitor speed: 64.6
+slope: 1
+80
+56
+road monitor speed: 62.44
+slope: 1
+80
+57
+road monitor speed: 59.92
+slope: 1
+80
+58
+road monitor speed: 57.04
+slope: 1
+80
+59
+road monitor speed: 53.8
+slope: 1
+80
+60
+road monitor speed: 50.2
+slope: 0.8
+80
+61
+road monitor speed: 46.6
+slope: 0.5
+80
+62
+road monitor speed: 43
+slope: 0.2
+80
+63
+road monitor speed: 39.4
+slope: 0
+80
+64
+road monitor speed: 35.8
+slope: 0
+80
+65
+road monitor speed: 32.2
+slope: 0
+80
+66
+road monitor speed: 28.6
+slope: 0
+80
+67
+road monitor speed: 25
+slope: 0
+80
+68
+road monitor speed: 21.4
+slope: 0
+80
+69
+road monitor speed: 17.8
+slope: 0
+80
+70
+road monitor speed: 14.2
+slope: 0
+80
+71
+road monitor speed: 10.6
+slope: 0
+80
+72
+road monitor speed: 7
+slope: 0
+80
+73
+road monitor speed: 3.4
+slope: 0
+80
+74
+road monitor speed: 0
+slope: 0
+80
+75
+road monitor speed: 0
+slope: 0
+80
+76
+road monitor speed: 0
+slope: 0
+80
+77
+road monitor speed: 0
+slope: 0
+80
+78
+road monitor speed: 0
+slope: 0
+80
+79
+road monitor speed: 0
+slope: 0
+80
+80
